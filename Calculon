@@ -1,0 +1,228 @@
+<script>
+var offer, photos, bts, pif, rar, sr, calculator, secure, summary, cname, email, company, phone;
+
+// Describe this function...
+function Calculation() {
+price = 0;
+if (offer == 1) {
+price = price + 4400;
+} else if (offer == 2) {
+price = price + 4800;
+} else if (offer == 3) {
+price = price + 7800;
+}
+if (photos == true) {
+price = price + 400;
+}
+if (bts == true) {
+price = price + 1200;
+}
+if (pif == true) {
+price = price - 900;
+}
+if (rar == true) {
+price = price - 600;
+}
+if (sr == true) {
+price = price - 300;
+}
+duetoday = price / 2;
+if (pif == true) {
+duetoday = price;
+}
+duelater = price / 2;
+if (pif == true) {
+duelater = 0;
+}
+$('[bloc=price]').text(price);
+$('[bloc=duetoday]').text(duetoday);
+$('[bloc=duelater]').text(duelater);
+}
+
+function Multi_Step_Check_Info() {
+  Calculation();
+  if (cname != null && email != null) {
+
+        nextTab = 'summary';
+        we_activeTab = $(".w--tab-active").attr("data-w-tab");
+        we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+        we_indexOfNextTab = we_indexOfActiveTab + 1;
+        we_indexOfPrevTab = we_indexOfActiveTab - 1;
+        we_prevTab = tabList[we_indexOfPrevTab];
+        we_amountOfTabs = tabList.length;
+
+        if (we_indexOfNextTab < we_amountOfTabs) {
+          tabList[we_indexOfNextTab] = nextTab;
+        } else {
+          tabList.push(nextTab);
+        }
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+        $(".w--tab-active").attr('next-tab',nextTab);
+        $($('[data-w-tab=summary]')).attr('prev-tab',we_activeTab);
+
+    }
+}
+
+var value_string = varToString({ offer });
+$('[name='+value_string+']').on('input',function() {offer = $(this).val(); if($(this).is(':checkbox')) { offer= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(offer)) { offer = parseFloat(offer); } Calculation();
+});$("label.w-radio").on("click", function () {if ($(this).children('[name=offer]').length != 0) {offer = $('[name='+value_string+']', this).val();
+}
+});var value_string = varToString({ photos });
+$('[name='+value_string+']').on('input',function() {photos = $(this).val(); if($(this).is(':checkbox')) { photos= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(photos)) { photos = parseFloat(photos); } Calculation();
+});$("label.w-radio").on("click", function () {if ($(this).children('[name=photos]').length != 0) {photos = $('[name='+value_string+']', this).val();
+}
+});var value_string = varToString({ bts });
+$('[name='+value_string+']').on('input',function() {bts = $(this).val(); if($(this).is(':checkbox')) { bts= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(bts)) { bts = parseFloat(bts); } Calculation();
+});$("label.w-radio").on("click", function () {if ($(this).children('[name=bts]').length != 0) {bts = $('[name='+value_string+']', this).val();
+}
+});var value_string = varToString({ pif });
+$('[name='+value_string+']').on('input',function() {pif = $(this).val(); if($(this).is(':checkbox')) { pif= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(pif)) { pif = parseFloat(pif); } Calculation();
+});$("label.w-radio").on("click", function () {if ($(this).children('[name=pif]').length != 0) {pif = $('[name='+value_string+']', this).val();
+}
+});var value_string = varToString({ rar });
+$('[name='+value_string+']').on('input',function() {rar = $(this).val(); if($(this).is(':checkbox')) { rar= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(rar)) { rar = parseFloat(rar); } Calculation();
+});$("label.w-radio").on("click", function () {if ($(this).children('[name=rar]').length != 0) {rar = $('[name='+value_string+']', this).val();
+}
+});var value_string = varToString({ sr });
+$('[name='+value_string+']').on('input',function() {sr = $(this).val(); if($(this).is(':checkbox')) { sr= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(sr)) { sr = parseFloat(sr); } Calculation();
+});$("label.w-radio").on("click", function () {if ($(this).children('[name=sr]').length != 0) {sr = $('[name='+value_string+']', this).val();
+}
+});
+
+var we_tabs_next_button = '[bloc=next-question]';
+    var we_tabs_prev_button = '[bloc=prev-question]';
+    var we_tabs_active_class = 'active';
+
+    var we_activeTab,we_indexOfActiveTab, we_indexOfNextTab, we_indexOfPrevTab, we_prevTab, we_amountOfTabs, nextTab;
+
+    var tabList = ['calculator'];
+
+    openTab(tabList[0]);
+
+    $(we_tabs_next_button).on("click", function () {
+      var activeTab = $(".w--tab-active").attr("data-w-tab");
+      var indexOfActiveTab = tabList.indexOf(activeTab);
+      var indexOfNextTab = indexOfActiveTab + 1;
+      var nextTab = tabList[indexOfNextTab];
+      var amountOfTabs = tabList.length;
+      var attrNextTab = $('.w--tab-active').attr('next-tab');
+
+      openTab(attrNextTab);
+
+      attrNextTab = $('.w--tab-active').attr('next-tab');
+
+      if (typeof attrNextTab !== 'undefined' && attrNextTab !== false) {
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+      } else {
+        $(we_tabs_next_button).removeClass(we_tabs_active_class);
+      }
+
+      if (amountOfTabs > 1) {
+        $(we_tabs_prev_button).addClass(we_tabs_active_class);
+      }
+    });
+
+    $(we_tabs_prev_button).on("click", function () {
+      var activeTab = $(".w--tab-active").attr("data-w-tab");
+      var indexOfActiveTab = tabList.indexOf(activeTab);
+      var indexOfPrevTab = indexOfActiveTab - 1;
+      var prevTab = tabList[indexOfPrevTab];
+
+      var attrPrevTab = $('.w--tab-active').attr('prev-tab');
+
+      if (indexOfActiveTab > 0) {
+        openTab(attrPrevTab);
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+      }
+
+      if (indexOfActiveTab <= 1) {
+        $(we_tabs_prev_button).removeClass(we_tabs_active_class);
+      } else {
+        $(we_tabs_prev_button).addClass(we_tabs_active_class);
+      }
+    });
+
+    function openTab(tab) {
+      var tab_link = "a[data-w-tab=" + tab;
+      tab = "div[data-w-tab=" + tab;
+
+      $(tab).siblings(".tab-panel").removeClass("w--tab-active");
+      $(tab).addClass("w--tab-active");
+      $(tab_link).siblings("a").removeClass("w--current");
+      $(tab_link).addClass("w--current");
+    }var value_string = varToString({ calculator });
+$('[name='+value_string+']').on('input',function() {calculator = $(this).val(); if($(this).is(':checkbox')) { calculator= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(calculator)) { calculator = parseFloat(calculator); }   Calculation();
+
+nextTab = 'secure';
+        we_activeTab = $(".w--tab-active").attr("data-w-tab");
+        we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+        we_indexOfNextTab = we_indexOfActiveTab + 1;
+        we_indexOfPrevTab = we_indexOfActiveTab - 1;
+        we_prevTab = tabList[we_indexOfPrevTab];
+        we_amountOfTabs = tabList.length;
+
+        if (we_indexOfNextTab < we_amountOfTabs) {
+          tabList[we_indexOfNextTab] = nextTab;
+        } else {
+          tabList.push(nextTab);
+        }
+        $(we_tabs_next_button).addClass(we_tabs_active_class);
+        $(".w--tab-active").attr('next-tab',nextTab);
+        $($('[data-w-tab=cname]')).attr('prev-tab',we_activeTab);
+
+
+      }});
+var value_string = varToString({ cname });
+$('[name='+value_string+']').on('input',function() {cname = $(this).val(); if($(this).is(':checkbox')) { cname= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(cname)) { cname = parseFloat(cname); }   Multi_Step_Check_Info();
+});$("label.w-radio").on("click", function () {if ($(this).children('[name=cname]').length != 0) {cname = $('[name='+value_string+']', this).val();
+}
+});var value_string = varToString({ email });
+$('[name='+value_string+']').on('input',function() {email = $(this).val(); if($(this).is(':checkbox')) { email= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(email)) { email = parseFloat(email); }   Multi_Step_Check_Info();
+});$("label.w-radio").on("click", function () {if ($(this).children('[name=email]').length != 0) {email = $('[name='+value_string+']', this).val();
+}
+});var value_string = varToString({ company });
+$('[name='+value_string+']').on('input',function() {company = $(this).val(); if($(this).is(':checkbox')) { company= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(company)) { company = parseFloat(company); }   Multi_Step_Check_Info();
+}
+});var value_string = varToString({ phone });
+$('[name='+value_string+']').on('input',function() {phone = $(this).val(); if($(this).is(':checkbox')) { phone= !$(this).siblings('.w-checkbox-input').hasClass('w--redirected-checked'); }if($.isNumeric(phone)) { phone = parseFloat(phone); }   Calculation();
+
+
+      nextTab = 'summary';
+      we_activeTab = $(".w--tab-active").attr("data-w-tab");
+      we_indexOfActiveTab = tabList.indexOf(we_activeTab);
+      we_indexOfNextTab = we_indexOfActiveTab + 1;
+      we_indexOfPrevTab = we_indexOfActiveTab - 1;
+      we_prevTab = tabList[we_indexOfPrevTab];
+      we_amountOfTabs = tabList.length;
+
+      if (we_indexOfNextTab < we_amountOfTabs) {
+        tabList[we_indexOfNextTab] = nextTab;
+      } else {
+        tabList.push(nextTab);
+      }
+      $(we_tabs_next_button).addClass(we_tabs_active_class);
+      $(".w--tab-active").attr('next-tab',nextTab);
+      $($('[data-w-tab=summary]')).attr('prev-tab',we_activeTab);
+
+      });$("label.w-radio").on("click", function () {if ($(this).children('[name=company]').length != 0) {company = $('[name='+value_string+']', this).val();
+}
+});$('[bloc=next-question]').on('click',function() {
+  if($('.w--tab-active').attr('data-w-tab')=='summary') {
+          $('[bloc=SIC-Button-Box]').css({
+      'display':'none',
+    });
+
+      }});
+$('[bloc=prev-question]').on('click',function() {
+  if($('.w--tab-active').attr('data-w-tab')=='company') {
+          $('[bloc=meeting-summary]').css({
+      'display':'flex',
+    });
+}});
+
+$('[bloc=next-question]').on('click',function() {
+        if($('.w--tab-active').attr('data-w-tab')=='company') {
+                $('[bloc=SIC-submission]').css({
+            'display':'block',
+          });
+</script>
